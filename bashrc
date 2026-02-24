@@ -1,5 +1,12 @@
 source $HOME/.bash_aliases;
 
+if [[ -f ~/.bashrc.bak ]]; then
+	$agefile=$HOME/.bashrc.bak;
+else
+	touch $HOME/.age;
+	$agefile=$HOME/.age;
+fi
+
 ###Colors
 CYAN="\[\e[38;2;25;249;216m\]";
 GREEN="\[\e[38;2;93;213;3m\]";
@@ -60,6 +67,16 @@ VCS_PROMPT(){
 	if [ "$VCS_BRANCH" ]; then
 		echo -n "($VCS_BRANCH$(VCS_F_BEHIND)$(VCS_F_AHEAD)$(VCS_F_UNCOMMITED)$(VCS_F_UNSTAGED)$(VCS_F_UNTRACKED))";
 	fi
+}
+
+AGE()
+{
+	if [ "$1" == "RESET" ]; then
+		touch $agefile;
+	elif [ $(($(date +%s) - $(date +%s -r $agefile))) -gt "12600" ]; then
+		echo "\n\[\e[38;5;231;48;2;210;15;57m\]SANDBOX OVER 3 AND A HALF HOURS OLD!!!\nenter 'AGE RESET' to reset this warning;
+	fi
+	
 }
 
 ###PROMPT
