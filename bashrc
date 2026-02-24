@@ -79,7 +79,7 @@ AGE()
 
 ###PROMPT
 prompt() {
-	L1="\u@sandbox:\w jobs:\j";
+	L1="\u@sandbox:\w jobs:\j$(AGE)";
 	R1="$(VCS_PROMPT)";
 	L2="\n>$AE";
 	PS1=$(printf "%s%*s%s%s%s" "$GREEN" "$(tput cols)" "$R1\r" "$MPC" "$L1" "$L2");
