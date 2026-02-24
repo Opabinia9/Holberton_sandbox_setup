@@ -1,11 +1,9 @@
 source $HOME/.bash_aliases;
 
-if [[ -f ~/.bashrc.bak ]]; then
-	$agefile=$HOME/.bashrc.bak;
-else
+if [[ ! -f ~/.age ]]; then
 	touch $HOME/.age;
-	$agefile=$HOME/.age;
 fi
+agefile=$HOME/.age;
 
 ###Colors
 CYAN="\[\e[38;2;25;249;216m\]";
@@ -71,10 +69,11 @@ VCS_PROMPT(){
 
 AGE()
 {
+	agefile="$home/.age"
 	if [ "$1" == "RESET" ]; then
 		touch $agefile;
 	elif [ $(($(date +%s) - $(date +%s -r $agefile))) -gt "12600" ]; then
-		echo "\n\[\e[38;5;231;48;2;210;15;57m\]SANDBOX OVER 3 AND A HALF HOURS OLD!!!\nenter 'AGE RESET' to reset this warning;
+		echo "\n\[\e[38;5;231;48;2;210;15;57m\]SANDBOX OVER 3 AND A HALF HOURS OLD!!!\nenter 'AGE RESET' to reset this warning";
 	fi
 	
 }
