@@ -19,7 +19,7 @@ rmdf()
 		DF=("empty_directory" "my_school" "not_here" "old_school" "ready_to_be_removed" "school");
 		echo "Would you like to remove the defualt folders and files from the holberton sandbox";
 		echo "${DF[*]}";
-		read -p $'y/n: ' -r remove;
+		remove="y";
 		if [[ "$remove" == "y" ]];then
 			echo "removing defualts!";
 			for d in "${DF[@]}"; do
@@ -36,22 +36,24 @@ if [[ $SHELL == *bash ]]; then
 
 	rmdf;
 	
-	echo "hello, getting bashrc and saving your old one";
 	if [[ -f ~/.bashrc ]]; then
 		mv $HOME/.bashrc $HOME/.bashrc.bak;
 	fi
 	wget -qO ~/.bashrc https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/bashrc;
 
-	echo "getting aliases and saving your old ones";
 	if [[ -f $HOME/.bash_aliases ]]; then
 		mv $HOME/.bash_aliases $HOME/.bash_aliases.bak;
 	fi
 	wget -qO ~/.bash_aliases https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/bash_aliases;
 
-	echo "configuring git"
+	if [[ -f ~/._vimrc ]]; then
+		mv $HOME/.vimrc $HOME/.vimrc.bak;
+	fi
+	wget -qO ~/.vim https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/vimrc;
+
 	gitsetup;
 	
-	source ~/.bashrc
+	source ~/.bashrc;
 else
 	echo "Sorry, this is ment for bash not $SHELL";
 fi

@@ -52,6 +52,12 @@ if [[ $SHELL == *bash ]]; then
 	fi
 	wget -qO ~/.bash_aliases https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/bash_aliases;
 
+	echo "hello, getting vimrc and saving your old one";
+	if [[ -f ~/._vimrc ]]; then
+		mv $HOME/.vimrc $HOME/.vimrc.bak;
+	fi
+	wget -qO ~/.vim https://raw.githubusercontent.com/Opabinia9/holberton-sandbox-setup/refs/heads/main/vimrc;
+	
 	echo "configuring git";
 	gitsetup "$UN" "$EMAIL" "$NAME";
 
