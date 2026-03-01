@@ -98,3 +98,10 @@ newtask() {
 	echo "{" >> $1;
 	echo "}" >> $1;
 }
+
+bettypush(){
+	betty $1;
+	read -p "all good? if yes enter commit message: " m;
+  git commit -m "$m" &&
+  git push &&
+}
